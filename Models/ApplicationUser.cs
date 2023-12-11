@@ -5,7 +5,8 @@ namespace Doyou2.Models
 {
     public class ApplicationUser : IdentityUser
     {
-        
+        public Guid Id {  get; set; }
+
         [Required]
         public bool Deleted {  get; set; } =false;
 

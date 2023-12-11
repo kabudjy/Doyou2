@@ -5,7 +5,7 @@
 namespace Doyou2.Data.Migrations
 {
     /// <inheritdoc />
-    public partial class AddModells : Migration
+    public partial class AddControllers : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

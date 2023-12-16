@@ -3,9 +3,9 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Doyou2.Models
 {
-    public enum Categories { Dessert, Meat, Fish, Appetizer}
+    public enum Categories { DESSERT, MEAT, FISH, APPETIZER}
 
-    public enum Difficulties { Easy, Normal, Hard}
+    public enum Difficulties { EASY, NORMAL, HARD}
     public class Recipes
     {
         [Key] 
@@ -33,11 +33,21 @@ namespace Doyou2.Models
         
         public bool Approved { get; set; } = false;
 
-        public double Total_reviews { get; set; }
+        private int _total_reviews = 0;
+        public int Total_reviews {
+            get { return _total_reviews; }
+            set { _total_reviews += 1; }
+        }
 
-        public double Total_value_reviews { get; set; }
+        public int Total_value_reviews { get; set; }
 
-        public virtual ApplicationUser User { get; set; }  
+        [Required]
+        public virtual ApplicationUser User { get; set; }
+
+        [Required]
+        public virtual ICollection<Ingredients> Ingredients { get; set; }
+
+        public virtual ICollection<Favorites> Favorites { get; set; }
 
         [NotMapped]
         public double AverageRating

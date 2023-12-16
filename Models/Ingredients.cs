@@ -6,18 +6,12 @@ namespace Doyou2.Models
     public class Ingredients
     {
         [Key]
-        public Guid Id { get; set; }
+        public Guid Id { get; set; } = Guid.NewGuid();
 
         [Required]
         public string? Name { get; set; }
 
         [Required]
-        public string? Description { get; set; }
-
-        [Required]
-        public Unities unity { get; set; }
-
-        [Required]
-        public Guid RecipeId { get; set; }
+        public string? Quantity { get; set; }
     }
 }

@@ -9,11 +9,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace Doyou2.Data.Migrations
+namespace Doyou2.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20231211222411_Add-Modells")]
-    partial class AddModells
+    [Migration("20231216203013_Add-Models")]
+    partial class AddModels
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -37,6 +37,9 @@ namespace Doyou2.Data.Migrations
                         .IsConcurrencyToken()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<DateTime>("Created_date")
+                        .HasColumnType("datetime2");
+
                     b.Property<bool>("Deleted")
                         .HasColumnType("bit");
 
@@ -45,6 +48,9 @@ namespace Doyou2.Data.Migrations
                         .HasColumnType("nvarchar(256)");
 
                     b.Property<bool>("EmailConfirmed")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsAdmin")
                         .HasColumnType("bit");
 
                     b.Property<bool>("Locked")
@@ -94,26 +100,49 @@ namespace Doyou2.Data.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "56bdf8ac-962d-45b7-9ad3-5e5889d55a35",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "ab66c8f1-3e04-4926-a413-b7004430d01d",
+                            Created_date = new DateTime(2023, 12, 16, 20, 30, 13, 432, DateTimeKind.Local).AddTicks(536),
+                            Deleted = false,
+                            Email = "admin@gmail.com",
+                            EmailConfirmed = true,
+                            IsAdmin = true,
+                            Locked = false,
+                            LockoutEnabled = false,
+                            NormalizedEmail = "ADMIN@GMAIL.COM",
+                            NormalizedUserName = "ADMIN@GMAIL.COM",
+                            PasswordHash = "AQAAAAIAAYagAAAAEBfvqURn8V0IElYjO0wz0WeQ2xanve7XOaEHQyylt0J9+QqJkmKDZlxDfsPg8sAR6g==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "",
+                            TwoFactorEnabled = false,
+                            UserName = "admin@gmail.com"
+                        });
                 });
 
             modelBuilder.Entity("Doyou2.Models.Favorites", b =>
                 {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
+                    b.Property<Guid>("RecipeID")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("RecipesIdGuid")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("UsersIdId")
-                        .IsRequired()
+                    b.Property<string>("UserId")
                         .HasColumnType("nvarchar(450)");
 
-                    b.HasKey("Id");
+                    b.Property<Guid>("RecipesId")
+                        .HasColumnType("uniqueidentifier");
 
-                    b.HasIndex("RecipesIdGuid");
+                    b.Property<string>("UsersId")
+                        .HasColumnType("nvarchar(450)");
 
-                    b.HasIndex("UsersIdId");
+                    b.HasKey("RecipeID", "UserId");
+
+                    b.HasIndex("RecipesId");
+
+                    b.HasIndex("UsersId");
 
                     b.ToTable("Favorites");
                 });
@@ -124,32 +153,31 @@ namespace Doyou2.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid>("RecipeId")
+                    b.Property<string>("Quantity")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid?>("RecipesId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<int>("unity")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
+
+                    b.HasIndex("RecipesId");
 
                     b.ToTable("Ingredients");
                 });
 
             modelBuilder.Entity("Doyou2.Models.Recipes", b =>
                 {
-                    b.Property<Guid>("Guid")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<bool>("Aproved")
+                    b.Property<bool>("Approved")
                         .HasColumnType("bit");
 
                     b.Property<int>("Category")
@@ -174,13 +202,19 @@ namespace Doyou2.Data.Migrations
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
 
-                    b.Property<double>("Total_reviews")
-                        .HasColumnType("float");
+                    b.Property<int>("Total_reviews")
+                        .HasColumnType("int");
 
-                    b.Property<double>("Total_value_reviews")
-                        .HasColumnType("float");
+                    b.Property<int>("Total_value_reviews")
+                        .HasColumnType("int");
 
-                    b.HasKey("Guid");
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Recipes");
                 });
@@ -465,21 +499,38 @@ namespace Doyou2.Data.Migrations
 
             modelBuilder.Entity("Doyou2.Models.Favorites", b =>
                 {
-                    b.HasOne("Doyou2.Models.Recipes", "RecipesId")
-                        .WithMany()
-                        .HasForeignKey("RecipesIdGuid")
+                    b.HasOne("Doyou2.Models.Recipes", "Recipes")
+                        .WithMany("Favorites")
+                        .HasForeignKey("RecipesId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("Doyou2.Models.ApplicationUser", "Users")
+                        .WithMany("Favorites")
+                        .HasForeignKey("UsersId")
+                        .OnDelete(DeleteBehavior.NoAction);
+
+                    b.Navigation("Recipes");
+
+                    b.Navigation("Users");
+                });
+
+            modelBuilder.Entity("Doyou2.Models.Ingredients", b =>
+                {
+                    b.HasOne("Doyou2.Models.Recipes", null)
+                        .WithMany("Ingredients")
+                        .HasForeignKey("RecipesId");
+                });
+
+            modelBuilder.Entity("Doyou2.Models.Recipes", b =>
+                {
+                    b.HasOne("Doyou2.Models.ApplicationUser", "User")
+                        .WithMany("Recipes")
+                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Doyou2.Models.ApplicationUser", "UsersId")
-                        .WithMany()
-                        .HasForeignKey("UsersIdId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("RecipesId");
-
-                    b.Navigation("UsersId");
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -531,6 +582,20 @@ namespace Doyou2.Data.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("Doyou2.Models.ApplicationUser", b =>
+                {
+                    b.Navigation("Favorites");
+
+                    b.Navigation("Recipes");
+                });
+
+            modelBuilder.Entity("Doyou2.Models.Recipes", b =>
+                {
+                    b.Navigation("Favorites");
+
+                    b.Navigation("Ingredients");
                 });
 #pragma warning restore 612, 618
         }

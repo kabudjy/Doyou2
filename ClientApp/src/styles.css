@@ -18,3 +18,11 @@ code {
   background-color: #1b6ec2;
   border-color: #1861ac;
 }
+body {
+  background-image: url('./img/background.jpg');
+  background-size: cover; /* ou 'contain', dependendo da preferência */
+  background-repeat: no-repeat;
+  background-position: center center;
+  height: 100%;
+  width: 100%;
+}

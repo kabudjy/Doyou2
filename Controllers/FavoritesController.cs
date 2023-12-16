@@ -55,7 +55,7 @@ namespace Doyou2.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutFavorites(Guid id, Favorites favorites)
         {
-            if (id != favorites.Id)
+            if (id != favorites.RecipeID)
             {
                 return BadRequest();
             }
@@ -91,9 +91,23 @@ namespace Doyou2.Controllers
               return Problem("Entity set 'ApplicationDbContext.Favorites'  is null.");
           }
             _context.Favorites.Add(favorites);
-            await _context.SaveChangesAsync();
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateException)
+            {
+                if (FavoritesExists(favorites.RecipeID))
+                {
+                    return Conflict();
+                }
+                else
+                {
+                    throw;
+                }
+            }
 
-            return CreatedAtAction("GetFavorites", new { id = favorites.Id }, favorites);
+            return CreatedAtAction("GetFavorites", new { id = favorites.RecipeID }, favorites);
         }
 
         // DELETE: api/Favorites/5
@@ -118,7 +132,7 @@ namespace Doyou2.Controllers
 
         private bool FavoritesExists(Guid id)
         {
-            return (_context.Favorites?.Any(e => e.Id == id)).GetValueOrDefault();
+            return (_context.Favorites?.Any(e => e.RecipeID == id)).GetValueOrDefault();
         }
     }
 }

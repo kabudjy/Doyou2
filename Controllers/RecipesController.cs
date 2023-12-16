@@ -55,7 +55,7 @@ namespace Doyou2.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutRecipes(Guid id, Recipes recipes)
         {
-            if (id != recipes.Guid)
+            if (id != recipes.Id)
             {
                 return BadRequest();
             }
@@ -93,7 +93,7 @@ namespace Doyou2.Controllers
             _context.Recipes.Add(recipes);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetRecipes", new { id = recipes.Guid }, recipes);
+            return CreatedAtAction("GetRecipes", new { id = recipes.Id }, recipes);
         }
 
         // DELETE: api/Recipes/5
@@ -118,7 +118,7 @@ namespace Doyou2.Controllers
 
         private bool RecipesExists(Guid id)
         {
-            return (_context.Recipes?.Any(e => e.Guid == id)).GetValueOrDefault();
+            return (_context.Recipes?.Any(e => e.Id == id)).GetValueOrDefault();
         }
     }
 }

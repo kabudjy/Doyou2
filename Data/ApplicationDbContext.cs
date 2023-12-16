@@ -13,8 +13,5 @@ namespace Doyou2.Data
         {
 
         }
-        public DbSet<Doyou2.Models.Recipes> Recipes { get; set; } = default!;
-        public DbSet<Doyou2.Models.Favorites> Favorites { get; set; } = default!;
-        public DbSet<Doyou2.Models.Ingredients> Ingredients { get; set; } = default!;
     }
 }

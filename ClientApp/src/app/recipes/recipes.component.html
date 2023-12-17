@@ -4,7 +4,8 @@
 <div class="container text-center"><app-search-bar (searchEvent)="searchRecipes"></app-search-bar></div>
 <div class="mx-auto w-60">
   <div>
-    <input type="text" placeholder="Pesquise aqui a receita" [(ngModel)]="searchTerm" />
-    <button (click)="searchRecipes()">Pesquisar</button>
+    <label class="col-3 mx-3"><h6>Pesquise aqui a receita</h6></label>
+    <input class="col-6 border-radius" type="text" [(ngModel)]="searchTerm" />
+    <button class="btn-width col-3 border-radius mx-3" (click)="searchRecipes()">Pesquisar</button>
   </div>
 </div>

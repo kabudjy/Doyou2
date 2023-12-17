@@ -46,6 +46,7 @@ export class AuthorizeService {
 
   public isAuthenticated(): Observable<boolean> {
     return this.getUser().pipe(map(u => !!u));
+
   }
 
   public getUser(): Observable<IUser | null> {

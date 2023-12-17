@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Doyou2.Migrations
 {
     /// <inheritdoc />
-    public partial class AddModels : Migration
+    public partial class AddEntities : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -290,7 +290,7 @@ namespace Doyou2.Migrations
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Created_date", "Deleted", "Email", "EmailConfirmed", "IsAdmin", "Locked", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
-                values: new object[] { "56bdf8ac-962d-45b7-9ad3-5e5889d55a35", 0, "ab66c8f1-3e04-4926-a413-b7004430d01d", new DateTime(2023, 12, 16, 20, 30, 13, 432, DateTimeKind.Local).AddTicks(536), false, "admin@gmail.com", true, true, false, false, null, "ADMIN@GMAIL.COM", "ADMIN@GMAIL.COM", "AQAAAAIAAYagAAAAEBfvqURn8V0IElYjO0wz0WeQ2xanve7XOaEHQyylt0J9+QqJkmKDZlxDfsPg8sAR6g==", null, false, "", false, "admin@gmail.com" });
+                values: new object[] { "4ea24b7c-7414-49f4-8544-15244816492e", 0, "0451f5f1-ce47-413f-bf77-49ae555ca84a", new DateTime(2023, 12, 22, 23, 30, 40, 996, DateTimeKind.Local).AddTicks(1022), false, "admin@gmail.com", true, true, false, false, null, "ADMIN@GMAIL.COM", "ADMIN@GMAIL.COM", "AQAAAAIAAYagAAAAEDNFfxHDegJje+qpQIJbIdplE6AINqKoChPM+pXur1430fmYubeKVI0OP4feSQlTQg==", null, false, "", false, "admin@gmail.com" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",

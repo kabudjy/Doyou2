@@ -4,6 +4,7 @@ using Doyou2.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Doyou2.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231222233042_Add-Entities")]
+    partial class AddEntities
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -101,10 +104,10 @@ namespace Doyou2.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "56bdf8ac-962d-45b7-9ad3-5e5889d55a35",
+                            Id = "4ea24b7c-7414-49f4-8544-15244816492e",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "ab66c8f1-3e04-4926-a413-b7004430d01d",
-                            Created_date = new DateTime(2023, 12, 16, 20, 30, 13, 432, DateTimeKind.Local).AddTicks(536),
+                            ConcurrencyStamp = "0451f5f1-ce47-413f-bf77-49ae555ca84a",
+                            Created_date = new DateTime(2023, 12, 22, 23, 30, 40, 996, DateTimeKind.Local).AddTicks(1022),
                             Deleted = false,
                             Email = "admin@gmail.com",
                             EmailConfirmed = true,
@@ -113,7 +116,7 @@ namespace Doyou2.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@GMAIL.COM",
                             NormalizedUserName = "ADMIN@GMAIL.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEBfvqURn8V0IElYjO0wz0WeQ2xanve7XOaEHQyylt0J9+QqJkmKDZlxDfsPg8sAR6g==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEDNFfxHDegJje+qpQIJbIdplE6AINqKoChPM+pXur1430fmYubeKVI0OP4feSQlTQg==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "",
                             TwoFactorEnabled = false,

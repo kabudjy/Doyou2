@@ -12,6 +12,11 @@ import { FetchDataComponent } from './fetch-data/fetch-data.component';
 import { ApiAuthorizationModule } from 'src/api-authorization/api-authorization.module';
 import { AuthorizeGuard } from 'src/api-authorization/authorize.guard';
 import { AuthorizeInterceptor } from 'src/api-authorization/authorize.interceptor';
+import { HomeboxesComponent } from './homeboxes/homeboxes.component';
+import { RecipesComponent } from './recipes/recipes.component';
+import { SearchBarComponent } from './search-bar/search-bar.component';
+import { AddRecipesComponent } from './add-recipes/add-recipes.component';
+
 
 @NgModule({
   declarations: [
@@ -19,7 +24,11 @@ import { AuthorizeInterceptor } from 'src/api-authorization/authorize.intercepto
     NavMenuComponent,
     HomeComponent,
     CounterComponent,
-    FetchDataComponent
+    FetchDataComponent,
+    HomeboxesComponent,
+    RecipesComponent,
+    SearchBarComponent,
+    AddRecipesComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -30,6 +39,8 @@ import { AuthorizeInterceptor } from 'src/api-authorization/authorize.intercepto
       { path: '', component: HomeComponent, pathMatch: 'full' },
       { path: 'counter', component: CounterComponent },
       { path: 'fetch-data', component: FetchDataComponent, canActivate: [AuthorizeGuard] },
+      { path: 'recipes', component: RecipesComponent },
+      { path: 'add-recipes', component: AddRecipesComponent },
     ])
   ],
   providers: [

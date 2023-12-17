@@ -1,0 +1,36 @@
+<form (submit)="onSubmit()">
+  <div >
+    <label class="col-3 mx-auto" for="name">Nome:</label>
+    <input class="col-9 mx-2" type="text" id="name" name="name" [(ngModel)]="recipe.name" required>
+  </div>
+  <div>
+    <label class="col-3 mx-auto" for="description">Descrição:</label>
+    <textarea class="col-9 mx-2" id="description" name="description" [(ngModel)]="recipe.description" required></textarea>
+  </div>
+  <div>
+    <label class="col-3 mx-auto" for="category">Categoria:</label>
+    <select class="col-9 mx-2" id="category" name="category" [(ngModel)]="recipe.category" required>
+      <option value=""></option>
+      <option value="Appetizer">Entrada</option>
+      <option value="Meat">Carne</option>
+      <option value="Fish">Peixe</option>
+      <option value="Dessert">Sobremesa</option>
+    </select>
+  </div>
+  <div>
+    <label class="col-3 mx-auto" for="difficulty">Dificuldade:</label>
+    <select class="col-9 mx-2" id="difficulty" name="difficulty" [(ngModel)]="recipe.difficulty" required>
+      <option value=""></option>
+      <option value="EASY">Fácil</option>
+      <option value="NORMAL">Médio</option>
+      <option value="HARD">Difícil</option>
+    </select>
+  </div>
+  <div>
+    <label class="col-3 mx-auto" for="duration">Duração (min):</label>
+    <input class="col-9 mx-2" type="text" id="duration" name="duration" [(ngModel)]="recipe.duration" required>
+  </div>
+  <div>
+    <button type="submit">Enviar Receita</button>
+  </div>
+</form>

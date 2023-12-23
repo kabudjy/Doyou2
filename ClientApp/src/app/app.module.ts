@@ -20,7 +20,10 @@ import { UsersManagementComponent } from './users-management/users-management.co
 import { RecipesManagementComponent } from './recipes-management/recipes-management.component';
 import { ManagementComponent } from './management/management.component';
 import { SideMenuComponent } from './side-menu/side-menu.component';
+<<<<<<< HEAD
 import { AdminGuard } from 'src/api-authorization/admin.guard';
+=======
+>>>>>>> b16d9b5772c3dadf1d89a583eb19b9ee45cc503e
 
 
 @NgModule({
@@ -50,9 +53,15 @@ import { AdminGuard } from 'src/api-authorization/admin.guard';
       { path: 'fetch-data', component: FetchDataComponent, canActivate: [AuthorizeGuard] },
       { path: 'recipes', component: RecipesComponent },
       { path: 'add-recipes', component: AddRecipesComponent, },
+<<<<<<< HEAD
       { path: 'users-management', component: UsersManagementComponent, canActivate: [AdminGuard] },
       { path: 'recipes-management', component: RecipesManagementComponent, canActivate: [AdminGuard] },
       { path: 'management', component: ManagementComponent, canActivate: [AdminGuard] },
+=======
+      { path: 'users-management', component: UsersManagementComponent, },
+      { path: 'recipes-management', component: RecipesManagementComponent, },
+      { path: 'management', component: ManagementComponent, },
+>>>>>>> b16d9b5772c3dadf1d89a583eb19b9ee45cc503e
     ])
   ],
   providers: [

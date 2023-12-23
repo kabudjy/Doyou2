@@ -1,36 +1,66 @@
-<form (submit)="onSubmit()">
-  <div >
-    <label class="col-3 mx-auto" for="name">Nome:</label>
-    <input class="col-9 mx-2" type="text" id="name" name="name" [(ngModel)]="recipe.name" required>
+<form [formGroup]="recipeForm" (ngSubmit)="submitForm()" class="container mt-5">
+
+  <input type="hidden" formControlName="id" />
+  <input type="hidden" formControlName="userid" />
+
+  <div class="form-group">
+    <label for="name">Nome:</label>
+    <input type="text" class="form-control" id="name" formControlName="name" />
   </div>
-  <div>
-    <label class="col-3 mx-auto" for="description">Descrição:</label>
-    <textarea class="col-9 mx-2" id="description" name="description" [(ngModel)]="recipe.description" required></textarea>
+
+  <div class="form-row d-flex">
+    <div class="form-group col-md-4">
+      <label for="category">Categoria:</label>
+      <select class="form-control" id="category" formControlName="category">
+        <option value="Aperitivo">Aperitivo</option>
+        <option value="Carne">Carne</option>
+        <option value="Peixe">Peixe</option>
+        <option value="Sobremesa">Sobremesa</option>
+      </select>
+    </div>
+
+    <div class="form-group col-md-4 mx-2">
+      <label for="difficulty">Dificuldade:</label>
+      <select class="form-control" id="difficulty" formControlName="difficulty">
+        <option value="Fácil">Fácil</option>
+        <option value="Normal">Normal</option>
+        <option value="Difícil">Difícil</option>
+      </select>
+    </div>
+
+    <div class="form-group col-md-4">
+      <label for="duration">Duração:</label>
+      <input type="number" class="form-control" id="duration" formControlName="duration" />
+    </div>
   </div>
-  <div>
-    <label class="col-3 mx-auto" for="category">Categoria:</label>
-    <select class="col-9 mx-2" id="category" name="category" [(ngModel)]="recipe.category" required>
-      <option value=""></option>
-      <option value="Appetizer">Entrada</option>
-      <option value="Meat">Carne</option>
-      <option value="Fish">Peixe</option>
-      <option value="Dessert">Sobremesa</option>
-    </select>
+
+  <div class="form-group">
+    <label for="description">Descrição:</label>
+    <input type="text" class="form-control" id="description" formControlName="description" />
   </div>
-  <div>
-    <label class="col-3 mx-auto" for="difficulty">Dificuldade:</label>
-    <select class="col-9 mx-2" id="difficulty" name="difficulty" [(ngModel)]="recipe.difficulty" required>
-      <option value=""></option>
-      <option value="EASY">Fácil</option>
-      <option value="NORMAL">Médio</option>
-      <option value="HARD">Difícil</option>
-    </select>
+
+  <div formArrayName="ingredients">
+    <div *ngFor="let ingredient of ingredientsArray.controls; let i = index">
+      <div [formGroupName]="i" class="row mb-3">
+        <div class="col-md-5">
+          <label for="ingredientName{{i}}">Nome:</label>
+          <input type="text" class="form-control" id="ingredientName{{i}}" formControlName="name" />
+        </div>
+        <div class="col-md-5">
+          <label for="ingredientQuantity{{i}}">Quantidade:</label>
+          <input type="text" class="form-control" id="ingredientQuantity{{i}}" formControlName="quantity" />
+        </div>
+        <div class="col-md-2 align-self-end">
+          <button type="button" class="btn btn-danger" (click)="removeIngredient(i)">Remover</button>
+        </div>
+      </div>
+    </div>
   </div>
-  <div>
-    <label class="col-3 mx-auto" for="duration">Duração (min):</label>
-    <input class="col-9 mx-2" type="text" id="duration" name="duration" [(ngModel)]="recipe.duration" required>
+
+  <div class="form-group">
+    <button type="button" class="btn btn-success" (click)="addIngredient()">Adicionar Ingredientes</button>
   </div>
-  <div>
-    <button type="submit">Enviar Receita</button>
-  </div>
+
+  <div class="mb-3"></div>
+  <button type="submit" class="btn btn-primary">Salvar</button>
 </form>

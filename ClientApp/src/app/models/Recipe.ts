@@ -4,10 +4,9 @@ export interface Recipe {
   id: string;
   name: string;
   description: string;
-  title: string;
   difficulty: number;
-  category: string;
-  duration: number;
+  category: number;
+  duration: string;
   userid: string;
   ingredients: Ingredient[];
 }

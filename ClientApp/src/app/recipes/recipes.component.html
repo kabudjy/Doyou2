@@ -5,7 +5,28 @@
 <div class="mx-auto w-60">
   <div>
     <label class="col-3 mx-3"><h6>Pesquise aqui a receita</h6></label>
-    <input class="col-6 border-radius" type="text" [(ngModel)]="searchTerm" (input)="searchRecipes()"/>
+    <input class="col-6 border-radius" type="text" [(ngModel)]="searchTerm" (input)="searchRecipes()" />
     <button class="btn-width col-3 border-radius mx-3" (click)="searchRecipes()">Pesquisar</button>
   </div>
+  <br />
+  <h2>Lista de Receitas</h2>
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Nome da Receita</th>
+        <th>Descrição</th>
+        <!-- Adicione mais colunas conforme necessário -->
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let recipe of recipes">
+        <td>{{ recipe.id }}</td>
+        <td>{{ recipe.recipeName }}</td>
+        <td>{{ recipe.description }}</td>
+        <!-- Adicione mais colunas conforme necessário -->
+      </tr>
+    </tbody>
+  </table>
 </div>

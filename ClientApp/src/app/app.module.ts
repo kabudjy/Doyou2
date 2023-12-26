@@ -51,10 +51,10 @@ import { AdminGuard } from 'src/api-authorization/admin.guard';
       { path: 'counter', component: CounterComponent },
       { path: 'fetch-data', component: FetchDataComponent, canActivate: [AuthorizeGuard] },
       { path: 'recipes', component: RecipesComponent },
-      { path: 'add-recipes', component: AddRecipesComponent, },
-      { path: 'users-management', component: UsersManagementComponent },
-      { path: 'recipes-management', component: RecipesManagementComponent },
-      { path: 'management', component: ManagementComponent },
+      { path: 'add-recipes', component: AddRecipesComponent, canActivate: [AuthorizeGuard] },
+      { path: 'users-management', component: UsersManagementComponent, canActivate: [AuthorizeGuard] },
+      { path: 'recipes-management', component: RecipesManagementComponent, canActivate: [AuthorizeGuard] },
+      { path: 'management', component: ManagementComponent, canActivate: [AuthorizeGuard] },
     ])
   ],
   providers: [

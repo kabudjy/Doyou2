@@ -13,7 +13,7 @@ export class RecipesComponent {
   constructor(private apiService: ApiService) { }
 
   ngOnInit() {
-    this.apiService.getRecipes().subscribe(
+    this.apiService.getRecipes()?.subscribe(
       (result) => {
         this.recipes = result;
       },

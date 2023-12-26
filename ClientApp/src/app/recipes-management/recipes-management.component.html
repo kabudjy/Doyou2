@@ -6,6 +6,23 @@
       </td>
       <td class="col-9">
         <p>recipes-management works!</p>
+        <br />
+        <table>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Nome da Receita</th>
+              <!-- Adicione mais colunas conforme necessário -->
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let recipe of recipes">
+              <td>{{ recipe.id }}</td>
+              <td>{{ recipe.recipeName }}</td>
+              <!-- Adicione mais colunas conforme necessário -->
+            </tr>
+          </tbody>
+        </table>
       </td>
     </tr>
   </tbody>

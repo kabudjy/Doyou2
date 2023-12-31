@@ -43,7 +43,7 @@
     <div *ngFor="let ingredient of ingredientsArray.controls; let i = index">
       <div [formGroupName]="i" class="row mb-3">
         <div class="col-md-5">
-          <label for="ingredientName{{i}}">Nome:</label>
+          <label for="ingredientName{{i}}">Nome do Ingrediente:</label>
           <input type="text" class="form-control" id="ingredientName{{i}}" formControlName="name" />
         </div>
         <div class="col-md-5">
@@ -62,5 +62,5 @@
   </div>
 
   <div class="mb-3"></div>
-  <button type="submit" class="btn btn-primary">Salvar</button>
+  <button type="submit" class="btn btn-primary">Guardar</button>
 </form>

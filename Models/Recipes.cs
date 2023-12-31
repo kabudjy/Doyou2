@@ -42,12 +42,12 @@ namespace Doyou2.Models
         public int Total_value_reviews { get; set; }
 
         [Required]
-        public virtual ApplicationUser User { get; set; }
+        public virtual ApplicationUser? User { get; set; }
 
         [Required]
-        public virtual ICollection<Ingredients> Ingredients { get; set; }
+        public virtual ICollection<Ingredients> Ingredients { get; } = new List<Ingredients>();
 
-        public virtual ICollection<Favorites> Favorites { get; set; }
+        public virtual ICollection<Favorites>? Favorites { get; set; }
 
         [NotMapped]
         public double AverageRating

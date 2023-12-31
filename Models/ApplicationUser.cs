@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace Doyou2.Models
 {
@@ -17,8 +18,10 @@ namespace Doyou2.Models
         [Required]
         public DateTime Created_date { get; set; } = DateTime.Now;
 
-        public ICollection<Favorites> Favorites { get; set; }
-
-        public ICollection<Recipes> Recipes { get; set; }
+        [JsonIgnore]
+        public ICollection<Favorites>? Favorites { get; set; }
+        
+        [JsonIgnore]
+        public ICollection<Recipes>? Recipes { get; set; }
     }
 }

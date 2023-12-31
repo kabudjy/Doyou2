@@ -1,32 +1,28 @@
-<div class="text-center">
-  <h3>Aqui vai encontrar todas as receitas que procura</h3>
-</div>
-<div class="container text-center"><app-search-bar (searchEvent)="searchRecipes"></app-search-bar></div>
-<div class="mx-auto w-60">
-  <div>
-    <label class="col-3 mx-3"><h6>Pesquise aqui a receita</h6></label>
-    <input class="col-6 border-radius" type="text" [(ngModel)]="searchTerm" (input)="searchRecipes()" />
-    <button class="btn-width col-3 border-radius mx-3" (click)="searchRecipes()">Pesquisar</button>
-  </div>
-  <br />
-  <h2>Lista de Receitas</h2>
-
-  <table class="table">
-    <thead>
-      <tr>
-        <th>ID</th>
-        <th>Nome da Receita</th>
-        <th>Descrição</th>
-        <!-- Adicione mais colunas conforme necessário -->
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let recipe of recipes">
-        <td>{{ recipe.id }}</td>
-        <td>{{ recipe.recipeName }}</td>
-        <td>{{ recipe.description }}</td>
-        <!-- Adicione mais colunas conforme necessário -->
-      </tr>
-    </tbody>
-  </table>
-</div>
+<table class="table">
+  <thead class="thead-dark">
+    <tr>
+      <th>Nome da Receita</th>
+      <th>Duração (min)</th>
+      <th>Dificuldade</th>
+      <th>Categoria</th>
+      <th>Ingredientes</th>
+      <th>Descrição</th>
+      <th>Ação</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let recipe of recipes">
+      <td>{{ recipe.name }}</td>
+      <td>{{ recipe.duration }}</td>
+      <td>{{ getDifficultyString(recipe.difficulty) }}</td>
+      <td>{{ getCategoryString(recipe.category) }}</td>
+      <td>{{ recipe.ingredients }}</td>
+      <td>{{ recipe.description }}</td>
+      <td>
+        <button class="btn btn-primary" (click)="showDetails(recipe)">
+          Ver Detalhes
+        </button>
+      </td>
+    </tr>
+  </tbody>
+</table>

@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { ApiService } from '../api.service';
+import { Recipe, Difficulty, Category } from '../models/Recipe';
 
 @Component({
   selector: 'app-recipes',
@@ -8,13 +9,17 @@ import { ApiService } from '../api.service';
 })
 export class RecipesComponent {
   searchTerm: string = '';
-  recipes: any;
+  recipes: Recipe[] = [];
 
   constructor(private apiService: ApiService) { }
 
   ngOnInit() {
+    this.getRecipes();
+  }
+
+  getRecipes() {
     this.apiService.getRecipes()?.subscribe(
-      (result) => {
+      (result: Recipe[]) => {
         this.recipes = result;
       },
       (error) => {
@@ -33,5 +38,17 @@ export class RecipesComponent {
         console.error('Erro ao obter dados da API:', error);
       }
     );
+  }
+
+  getDifficultyString(difficulty: Difficulty): string {
+    return Difficulty[difficulty];
+  }
+
+  getCategoryString(category: Category): string {
+    return Category[category];
+  }
+
+  showDetails(recipe: any): void {
+    recipe.showDetails = !recipe.showDetails;
   }
 }

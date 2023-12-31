@@ -12,6 +12,8 @@ import { Ingredient } from '../models/Ingredient';
 })
 export class AddRecipesComponent {
   recipeForm: FormGroup;
+  recipeData: Recipe = <Recipe>{};
+  ingredientsData: Ingredient[] = [];
 
   constructor(
     private http: HttpClient,
@@ -30,30 +32,32 @@ export class AddRecipesComponent {
       ingredients: this.formBuilder.array([]),
     });
 
-    this.authorize.getUser().subscribe((result: any) => {
-      if (result && result.sub) {
-        this.recipeForm.get('userid')?.setValue(result.sub);
-      }
+    authorize.getUser().subscribe((result: any) => {
+      this.recipeForm.get('userid')?.setValue(result.sub);
     });
+  }
+
+  submitForm() {
+    if (this.recipeForm.valid) {
+      this.http.post<Recipe>(`${this.baseUrl}api/recipes`, this.recipeForm.value).subscribe({
+        next: (response) => {
+          this.ingredientsArray.controls.forEach(async (value) => {
+            value.get('recipeid')?.setValue(response.id);
+            await this.http.post<Ingredient>(`${this.baseUrl}api/ingredients`, value.value).toPromise();
+          });
+          alert("Receita criada com sucesso");
+        },
+        error: (response) => {
+          console.error(response);
+        }
+      });
+    } else {
+      alert("Por favor, preencha todos os campos corretamente.");
+    }
   }
 
   get ingredientsArray() {
     return this.recipeForm.get('ingredients') as FormArray;
-  }
-
-  submitForm() {
-    this.http.post<Recipe>(`${this.baseUrl}api/recipes`, this.recipeForm.value).subscribe({
-      next: (response) => {
-        this.ingredientsArray.controls.forEach(async (control) => {
-          control.get('recipeid')?.setValue(response.id);
-          await this.http.post<Ingredient>(`${this.baseUrl}api/ingredients`, control.value).toPromise();
-        });
-        alert('Receita criada com sucesso');
-      },
-      error: (response) => {
-        console.error(response);
-      }
-    });
   }
 
   addIngredient() {
@@ -61,7 +65,7 @@ export class AddRecipesComponent {
       this.formBuilder.group({
         name: ['', Validators.required],
         quantity: ['', Validators.required],
-        recipeid: [''], // This will be set dynamically in submitForm
+        recipeid: [''],
       })
     );
   }
@@ -69,5 +73,6 @@ export class AddRecipesComponent {
   removeIngredient(index: number) {
     this.ingredientsArray.removeAt(index);
   }
-  }
+}
+
 

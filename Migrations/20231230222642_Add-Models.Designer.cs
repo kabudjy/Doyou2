@@ -12,15 +12,15 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Doyou2.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20231222233042_Add-Entities")]
-    partial class AddEntities
+    [Migration("20231230222642_Add-Models")]
+    partial class AddModels
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "7.0.12")
+                .HasAnnotation("ProductVersion", "7.0.14")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
@@ -104,10 +104,10 @@ namespace Doyou2.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "4ea24b7c-7414-49f4-8544-15244816492e",
+                            Id = "5d133573-d1f6-42a1-a2a8-e000456b6032",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "0451f5f1-ce47-413f-bf77-49ae555ca84a",
-                            Created_date = new DateTime(2023, 12, 22, 23, 30, 40, 996, DateTimeKind.Local).AddTicks(1022),
+                            ConcurrencyStamp = "872e85b3-62b5-4ab6-a3e5-c929d4cfacbf",
+                            Created_date = new DateTime(2023, 12, 30, 22, 26, 42, 281, DateTimeKind.Local).AddTicks(8789),
                             Deleted = false,
                             Email = "admin@gmail.com",
                             EmailConfirmed = true,
@@ -116,7 +116,7 @@ namespace Doyou2.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@GMAIL.COM",
                             NormalizedUserName = "ADMIN@GMAIL.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEDNFfxHDegJje+qpQIJbIdplE6AINqKoChPM+pXur1430fmYubeKVI0OP4feSQlTQg==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEPHb6dkoAJUqXvabUsDds1LX/JUy6L08QAcUlA+08UarJoCT0bpfcJ95FWaLMEn7Gw==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "",
                             TwoFactorEnabled = false,

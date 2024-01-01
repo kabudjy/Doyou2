@@ -6,12 +6,9 @@ namespace Doyou2.Models
 {
     public class ApplicationUser : IdentityUser
     {
-<<<<<<< HEAD
-        public Guid Id {  get; set; }
-=======
         [Required]
         public bool IsAdmin { get; set; } = false;
->>>>>>> Backend-Add
+
 
         [Required]
         public bool Deleted {  get; set; } =false;

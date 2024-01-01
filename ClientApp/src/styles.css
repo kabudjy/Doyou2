@@ -1,5 +1,5 @@
 /* You can add global styles to this file, and also import other style files */
-
+@import "~bootstrap/dist/css/bootstrap.css";
 /* Provide sufficient contrast against white background */
 a {
   color: #0366d6;
@@ -17,4 +17,12 @@ code {
   color: #fff;
   background-color: #1b6ec2;
   border-color: #1861ac;
+}
+body {
+  background-image: url('./img/background.jpg');
+  background-size: cover; /* ou 'contain', dependendo da preferência */
+  background-repeat: no-repeat;
+  background-position: center center;
+  height: 100%;
+  width: 100%;
 }

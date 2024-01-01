@@ -1,0 +1,28 @@
+<table class="table">
+  <thead class="thead-dark">
+    <tr>
+      <th>Nome da Receita</th>
+      <th>Duração (min)</th>
+      <th>Dificuldade</th>
+      <th>Categoria</th>
+      <th>Ingredientes</th>
+      <th>Descrição</th>
+      <th>Ação</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let recipe of recipes">
+      <td>{{ recipe.name }}</td>
+      <td>{{ recipe.duration }}</td>
+      <td>{{ getDifficultyString(recipe.difficulty) }}</td>
+      <td>{{ getCategoryString(recipe.category) }}</td>
+      <td>{{ recipe.ingredients }}</td>
+      <td>{{ recipe.description }}</td>
+      <td>
+        <button class="btn btn-primary" (click)="showDetails(recipe)">
+          Ver Detalhes
+        </button>
+      </td>
+    </tr>
+  </tbody>
+</table>

@@ -132,5 +132,8 @@
       }
     }
   },
-  "defaultProject": "Doyou2"
+  "defaultProject": "Doyou2",
+  "cli": {
+    "analytics": "360de263-e744-4ba4-ac16-5f5ef1b9930c"
+  }
 }

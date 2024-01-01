@@ -1,0 +1,32 @@
+<table>
+  <tbody>
+    <tr>
+      <td class="col-3">
+        <app-side-menu></app-side-menu>
+      </td>
+      <td class="col-9">
+        <p>users-management works!</p>
+
+        <h2>Lista de Usuários</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Nome</th>
+              <th>Email</th>
+              <!-- Adicione mais colunas conforme necessário -->
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let user of users">
+              <td>{{ user.id }}</td>
+              <td>{{ user.name }}</td>
+              <td>{{ user.email }}</td>
+              <!-- Adicione mais colunas conforme necessário -->
+            </tr>
+          </tbody>
+        </table>
+      </td>
+    </tr>
+  </tbody>
+</table>

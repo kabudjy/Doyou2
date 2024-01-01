@@ -1,11 +1,15 @@
 ﻿using Doyou2.Data;
 using Doyou2.Models;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace Doyou2.Controllers
 {
+    [Authorize]
+    [ApiController]
     [Route("api/[controller]")]
     [ApiController]
     public class UsersController : ControllerBase
@@ -17,9 +21,15 @@ namespace Doyou2.Controllers
                 _context = context;
             }
 
-        // GET: api/Users
-        [HttpGet]
-            public async Task<ActionResult<IEnumerable<ApplicationUser>>> GetUsers()
+            [HttpGet("token")]
+            [AllowAnonymous]
+            public async Task<ActionResult<string>> GetLoginToken()
+            {
+                return await HttpContext.GetTokenAsync("access_token");
+            }
+
+            [HttpGet]
+            public async Task<ActionResult<IEnumerable<ApplicationUser>>> GetUser()
             {
                 if (_context.Users == null)
                 {
@@ -29,34 +39,34 @@ namespace Doyou2.Controllers
             }
 
         // GET: api/Users/5
-        [HttpGet("{id}")]
-            public async Task<ActionResult<ApplicationUser>> GetUsers(Guid id)
+            [HttpGet("{id}")]
+            public async Task<ActionResult<ApplicationUser>> GetUser(string id)
             {
                 if (_context.Users == null)
                 {
                     return NotFound();
                 }
-                var users = await _context.Users.FindAsync(id);
+                var user = await _context.Users.FindAsync(id);
 
-                if (users == null)
+                if (user == null)
                 {
                     return NotFound();
                 }
 
-                return users;
+                return user;
             }
 
         // PUT: api/Users/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPut("{id}")]
-            public async Task<IActionResult> PutUsers(Guid id, ApplicationUser users)
+            [HttpPut("{id}")]
+            public async Task<IActionResult> PutUser(string id, ApplicationUser user)
             {
-                if (id != users.Id)
+                if (id != user.Id)
                 {
                     return BadRequest();
                 }
 
-                _context.Entry(users).State = EntityState.Modified;
+                _context.Entry(user).State = EntityState.Modified;
 
                 try
                 {
@@ -64,7 +74,7 @@ namespace Doyou2.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!UsersExists(id))
+                    if (!UserExists(id))
                     {
                         return NotFound();
                     }
@@ -77,44 +87,9 @@ namespace Doyou2.Controllers
                 return NoContent();
             }
 
-        // POST: api/Users
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPost]
-            public async Task<ActionResult<ApplicationUser>> PostUsers(ApplicationUser users)
-            {
-                if (_context.Users == null)
-                {
-                    return Problem("Entity set 'ApplicationDbContext.Users'  is null.");
-                }
-                _context.Users.Add(users);
-                await _context.SaveChangesAsync();
-
-                return CreatedAtAction("GetUsers", new { id = users.Id }, users);
-            }
-
-        // DELETE: api/Users/5
-        [HttpDelete("{id}")]
-            public async Task<IActionResult> DeleteUsers(Guid id)
-            {
-                if (_context.Users == null)
-                {
-                    return NotFound();
-                }
-                var users = await _context.Users.FindAsync(id);
-                if (users == null)
-                {
-                    return NotFound();
-                }
-
-                _context.Users.Remove(users);
-                await _context.SaveChangesAsync();
-
-                return NoContent();
-            }
-
-            private bool UsersExists(Guid id)
+            private bool UserExists(string id)
             {
                 return (_context.Users?.Any(e => e.Id == id)).GetValueOrDefault();
             }
         }
-    }
+}

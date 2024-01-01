@@ -6,4 +6,12 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'app';
+  searchTerm: string = '';
+
+  searchRecipes() {
+    // Adicione lógica para lidar com a pesquisa aqui
+    console.log('Pesquisar por:', this.searchTerm);
+}
+
+
 }

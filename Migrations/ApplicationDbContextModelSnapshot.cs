@@ -126,25 +126,24 @@ namespace Doyou2.Migrations
                     b.Property<Guid>("RecipeID")
                         .HasColumnType("uniqueidentifier");
 
-<<<<<<< HEAD:Data/Migrations/ApplicationDbContextModelSnapshot.cs
+
                     b.Property<Guid>("RecipeId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("UserId")
-                        .IsRequired()
-=======
+                        .IsRequired();
+
                     b.Property<string>("UserId")
->>>>>>> Backend-Add:Migrations/ApplicationDbContextModelSnapshot.cs
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<Guid>("RecipesId")
                         .HasColumnType("uniqueidentifier");
 
-<<<<<<< HEAD:Data/Migrations/ApplicationDbContextModelSnapshot.cs
+
                     b.HasIndex("RecipeId");
 
                     b.HasIndex("UserId");
-=======
+
                     b.Property<string>("UsersId")
                         .HasColumnType("nvarchar(450)");
 
@@ -153,7 +152,6 @@ namespace Doyou2.Migrations
                     b.HasIndex("RecipesId");
 
                     b.HasIndex("UsersId");
->>>>>>> Backend-Add:Migrations/ApplicationDbContextModelSnapshot.cs
 
                     b.ToTable("Favorites");
                 });
@@ -510,7 +508,6 @@ namespace Doyou2.Migrations
 
             modelBuilder.Entity("Doyou2.Models.Favorites", b =>
                 {
-<<<<<<< HEAD:Data/Migrations/ApplicationDbContextModelSnapshot.cs
                     b.HasOne("Doyou2.Models.Recipes", "Recipe")
                         .WithMany()
                         .HasForeignKey("RecipeId")
@@ -536,7 +533,6 @@ namespace Doyou2.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-=======
                     b.HasOne("Doyou2.Models.Recipes", "Recipes")
                         .WithMany("Favorites")
                         .HasForeignKey("RecipesId")
@@ -568,7 +564,6 @@ namespace Doyou2.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
->>>>>>> Backend-Add:Migrations/ApplicationDbContextModelSnapshot.cs
                     b.Navigation("User");
                 });
 
@@ -629,8 +624,6 @@ namespace Doyou2.Migrations
 
                     b.Navigation("Recipes");
                 });
-<<<<<<< HEAD:Data/Migrations/ApplicationDbContextModelSnapshot.cs
-=======
 
             modelBuilder.Entity("Doyou2.Models.Recipes", b =>
                 {
@@ -638,7 +631,7 @@ namespace Doyou2.Migrations
 
                     b.Navigation("Ingredients");
                 });
->>>>>>> Backend-Add:Migrations/ApplicationDbContextModelSnapshot.cs
+
 #pragma warning restore 612, 618
         }
     }

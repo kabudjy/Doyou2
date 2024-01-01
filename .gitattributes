@@ -59,3 +59,4 @@
 #*.RTF   diff=astextplain
 *.pack filter=lfs diff=lfs merge=lfs -text
 *.psd filter=lfs diff=lfs merge=lfs -text
+ClientApp/.angular/cache/15.2.7/angular-webpack/1c3b99c16b6a57e01321a400b1ad6f867e3b27d9/0.pack filter=lfs diff=lfs merge=lfs -text
